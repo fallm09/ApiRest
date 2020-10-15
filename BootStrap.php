@@ -20,11 +20,16 @@
                $controller_object= new $file();
                if(isset($url[1]))
                {
-                   $fall = $url[1];
-                   $controller_object->$fall();
+                   if(isset($url[2])){
+                    $fall = $url[1];
+                    $controller_object->$fall($url[2]);
+                   } else {
+                    $fall = $url[1];
+                    $controller_object->$fall();
+                   }
                    
                 }
-                 var_dump($url[1]);
+                 
                
             }else {
                 die($controller_file." n'existe pas");

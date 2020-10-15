@@ -29,13 +29,13 @@
           private $agence;
           /**
            * One operation has many comptes. This is the inverse side.
-           * @ORM\OneToMany(targetEntity="Compte", mappedBy="operation")
+           * @ORM\ManyToOne(targetEntity="Compte", inversedBy="operation")
            */
-          private $comptes;
+          private $compte;
           /**
            * Many operations have one affectation. This is the owning side.
-           * @ORM\ManyToOne(targetEntity="Affectation", inversedBy="operations")
-           * @ORM\JoinColumn(name="affectation_id", referencedColumnName="id")
+           * @ORM\ManyToOne(targetEntity="Compte", inversedBy="operations")
+           * @ORM\JoinColumn(name="compte_id", referencedColumnName="id")
            */
           private $affectation;
 
@@ -44,7 +44,6 @@
 
           public function __construct()
           {
-               $this->comptes = new ArrayCollection();
           }
 
           /**
@@ -227,25 +226,6 @@
                return $this;
           }
 
-          /**
-           * Get the value of comptes
-           */
-          public function getComptes()
-          {
-               return $this->comptes;
-          }
-
-          /**
-           * Set the value of comptes
-           *
-           * @return  self
-           */
-          public function setComptes($comptes)
-          {
-               $this->comptes = $comptes;
-
-               return $this;
-          }
 
           /**
            * Get the value of affectation
@@ -265,6 +245,26 @@
                $this->affectation = $affectation;
 
                return $this;
+          }
+
+          /**
+           * Get one operation has many comptes. This is the inverse side.
+           */ 
+          public function getCompte()
+          {
+                    return $this->compte;
+          }
+
+          /**
+           * Set one operation has many comptes. This is the inverse side.
+           *
+           * @return  self
+           */ 
+          public function setCompte($compte)
+          {
+                    $this->compte = $compte;
+
+                    return $this;
           }
      }
 

@@ -1,5 +1,6 @@
-    <?php
- 
+ <?php
+
+    use Doctrine\Common\Collections\ArrayCollection;
     use Doctrine\ORM\Mapping as ORM;
 
 
@@ -21,17 +22,16 @@
         private $solde;
         /** @ORM\Column(type="string") */
         private $datecreation;
-        /**
-         * Many compte have one operation. This is the owning side.
-         * @ORM\ManyToOne(targetEntity="Operation", inversedBy="comptes")
-         * @ORM\JoinColumn(name="operation_id", referencedColumnName="id")
+       /**
+         * One product has many features. This is the inverse side.
+         * @ORM\OneToMany(targetEntity="Operation", mappedBy="compte")
          */
         private $operation;
     
 
         public function __construct()
         {
-            
+            $this->operation = new ArrayCollection();
         }
 
         /**
